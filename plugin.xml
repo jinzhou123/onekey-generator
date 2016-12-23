@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Sample Category"
+            id="com.dfire.plugin.onekey.commands.category">
+      </category>
+      <command
+            categoryId="com.dfire.plugin.onekey.commands.category"
+            description="OneKey Generate"
+            id="com.dfire.plugin.onekey.commands.sampleCommand"
+            name="OneKey Generate">
+      </command>
+      <command
+            categoryId="com.dfire.plugin.onekey.commands.category"
+            description="OneKey QuickSwitch"
+            id="com.dfire.plugin.onekey.commands.QuickSwitchCommand"
+            name="OneKey QuickSwitch">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="com.dfire.plugin.onekey.commands.sampleCommand"
+            class="com.dfire.plugin.onekey.handlers.Handler">
+      </handler>
+      <handler
+            class="com.dfire.plugin.onekey.handlers.QuickSwitchHandler"
+            commandId="com.dfire.plugin.onekey.commands.QuickSwitchCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.dfire.plugin.onekey.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+1"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="com.dfire.plugin.onekey.commands.QuickSwitchCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="ALT+1">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution  
+         locationURI="popup:org.eclipse.ui.popup.any?after=additions">  
+      <separator  
+            name="com.dfire.plugin.onekey.separator1">  
+      </separator>  
+      <command
+            commandId="com.dfire.plugin.onekey.commands.sampleCommand"
+            icon="icons/csv.gif"
+            id="com.dfire.plugin.onekey.menus.sampleCommand"
+            label="OneKey Generate "
+            mnemonic="%command.mnemonic">  
+         <visibleWhen>  
+            <iterate  
+                  ifEmpty="false">  
+               <or>  
+                  <instanceof  
+                        value="org.eclipse.jdt.internal.core.SourceMethod">  
+                  </instanceof>  
+               </or>  
+            </iterate>  
+         </visibleWhen>  
+      </command>  
+   </menuContribution> 
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.dfire.plugin.onekey.toolbars.sampleToolbar">
+            <command
+                  commandId="com.dfire.plugin.onekey.commands.sampleCommand"
+                  icon="icons/csv.gif"
+                  tooltip="OneKey Generate"
+                  id="com.dfire.plugin.onekey.toolbars.sampleCommand">
+                  <visibleWhen>  
+            <iterate  
+                  ifEmpty="false">  
+               <or>  
+                  <instanceof  
+                        value="org.eclipse.jdt.internal.core.SourceMethod">  
+                  </instanceof>  
+               </or>  
+            </iterate>  
+         </visibleWhen> 
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="com.dfire.plugin.onekey.menus.sampleMenu"
+               label="QuickSwitch"
+               mnemonic="M">
+            <command
+                  commandId="com.dfire.plugin.onekey.commands.QuickSwitchCommand"
+                  id="com.dfire.plugin.onekey.menus.QuickSwitchCommand"
+                  mnemonic="S">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.dfire.plugin.onekey.toolbars.sampleToolbar">
+            <command
+                  commandId="com.dfire.plugin.onekey.commands.QuickSwitchCommand"
+                  icon="icons/switch.png"
+                  id="com.dfire.plugin.onekey.toolbars.QuickSwitchCommand"
+                  tooltip="QuickSwitch">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+</plugin>
